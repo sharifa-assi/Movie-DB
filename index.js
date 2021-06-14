@@ -98,6 +98,42 @@ app.get("/movies/delete", (req, res) => {
     
 })
 
-app.listen(3000);
 
+
+//readbydate
+app.get("/movies/read/by-date", (req, res) => {
+    const readbydate = [...movies];
+    readbydate.sort((a, b) => (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0));
+    const date = {
+        status: 200,
+        data: readbydate
+    }
+    res.send(date);
+})
+
+
+//readbyrating
+app.get("/movies/read/by-rating", (req, res) => {
+    const readbyrate = [...movies];
+    readbyrate.sort((a, b) => (a.rating > b.rating) ? 1 : ((b.rating > a.rating) ? -1 : 0));
+    const rating = {
+        status: 200,
+        data: readbyrate
+    }
+    res.send(rating);
+})
+
+
+
+//readbytitle
+app.get("/movies/read/by-title", (req, res) => {
+    const readbytitle = [...movies];
+    readbytitle.sort((a, b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0));
+    const title = {
+        status: 200,
+        data: readbytitle
+    }
+    res.send(title); })
+
+app.listen(3000);
 
