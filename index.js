@@ -4,10 +4,28 @@ const port = 3000
 
 app.get('/', (req, res) => res.send('ok'));
 
-// route
+//for test route
+
 app.get('/test', (req, res) => { res.send({   status:200, 
-                                              message:"ok" });
-                                           })
+    message:"ok" });
+ })
+
+
+//for time
+
+app.get("/time", (req, res) => {
+const t = new Date();
+const timeset = `${t.getHours()}:${t.getSeconds()}`;
+const time = {
+status : 200,
+message : timeset
+}
+res.send(time);
+})
+
+
+
+
 
 
 
