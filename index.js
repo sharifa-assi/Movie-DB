@@ -11,7 +11,7 @@ app.get('/test', (req, res) => { res.send({   status:200,
  })
 
 
-//for time
+//for time 
 
 app.get("/time", (req, res) => {
 const t = new Date();
@@ -23,12 +23,45 @@ message : timeset
 res.send(time);
 })
 
+//for Hello route
 
 
+    
+app.get("/hello/:id", (req, res) => {
+    const m = `Hello, ${req.params.id}`
+    const hi = {
+        status: 200,
+        message: m
+    }
+    res.send(hi)
+})
 
 
+// Search 
 
-
+app.get("/search", (req, res) => {
+    let status, message, data, search, error
+    if(req.query.s){
+        status = 200;
+        message = "ok";
+        data = req.query.s;
+        search = {
+            status: status,
+            message: message,
+            data: data
+        }
+    } else {
+        status = 500;
+        message = "you have to provide a search";
+        error = true;
+        search = {
+            status: status,
+            message: message,
+            error: error
+        }
+    }
+    res.send(search);
+})
 
 
 app.listen(3000);
