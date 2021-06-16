@@ -135,5 +135,50 @@ app.get("/movies/read/by-title", (req, res) => {
     }
     res.send(title); })
 
+
+    app.get("/movies/read/id/:id", (req, res) => {
+        if(req.params.id >= 0 && req.params.id < movies.length) {
+            result = {
+                status: 200,
+                data: movies[req.params.id]
+            }
+        } 
+        else {
+            result = {
+                status: 400,
+                error: true,
+                message: `The movie ${req.params.id} doesn't exist in the list !!`
+            }
+        }
+        res.send(result);
+    })
+
+
+
+
+    app.post("/movies/create", (req,res) => {
+        const movie = {
+          title : req.query.title,
+          year : req.query.year,
+          rating : req.query.rating
+        };
+        if(movie.rating == undefined) {
+          movie.rating = 4;
+        }
+        if ((movie.title) == 'undefined' || (movie.year == 'undefined') ||  (isNaN(movie.year)) || (movie.year.toString().length !== 4)){
+          res.json({status:403, error:true, message:'you cannot create a movie without providing a title and a year'});
+          console.log(res.json)
+        }
+        else{
+          movies.push(movie);
+          res.send(movie);
+          res.json({status: 200, message: 'ok' , data: movies})
+        }
+      });
+
+
+
+    
+
 app.listen(3000);
 
