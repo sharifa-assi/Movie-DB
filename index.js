@@ -155,7 +155,6 @@ app.get("/movies/read/by-title", (req, res) => {
 
 
 
-
     app.post("/movies/create", (req,res) => {
         const movie = {
           title : req.query.title,
@@ -172,9 +171,10 @@ app.get("/movies/read/by-title", (req, res) => {
         else{
           movies.push(movie);
           res.send(movie);
-          res.json({status: 200, message: 'ok' , data: movies})
+          res.json({status: 200, message: 'Movie Added' , data: movies})
         }
       });
+
 
 
 
